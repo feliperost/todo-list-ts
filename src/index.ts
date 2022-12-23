@@ -28,12 +28,17 @@ form?.addEventListener("submit", e => {
 
   addListItem(newTask)
   input.value = ""
+  saveTasks()
 })
 
 function addListItem(task: Task) {
   const item = document.createElement("li")
   const label = document.createElement("label")
   const checkbox = document.createElement("input")
+  const deleteBtn = document.createElement("button")
+  deleteBtn.innerText = "X"
+  deleteBtn.setAttribute("id", "delete-btn")
+
   checkbox.addEventListener("change", () => {
     task.completed = checkbox.checked
     saveTasks()
@@ -44,6 +49,17 @@ function addListItem(task: Task) {
   label.append(checkbox, task.title)
   item.append(label)
   list?.append(item)
+  list?.append(deleteBtn)
+
+  deleteBtn.addEventListener("click", () => {
+    console.log(task.id)
+    let currentTasks = JSON.parse(localStorage.getItem("TASKS")  || '{}')
+    console.log(currentTasks)
+    // currentTasks.splice(task.id, 1)
+    // localStorage.setItem("TASKS", JSON.stringify(currentTasks))
+    // localStorage.setItem("TASKS", list)
+    // aqui não podemos deletar a array toda, então teremos que recriar a lista sem o item em questão
+  })
 }
 
 function saveTasks() {
@@ -55,3 +71,4 @@ function loadTasks(): Task[] {
   if (taskJSON == null) return []
   return JSON.parse(taskJSON)
 }
+
