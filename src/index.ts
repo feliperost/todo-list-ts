@@ -52,19 +52,18 @@ function addListItem(task: Task) {
   list?.append(item)
   list?.append(deleteBtn)
 
-  deleteBtn.addEventListener("click", e => {
-    e.preventDefault()
+  deleteBtn.addEventListener("click", () => {
     deleteItem(task)
   })
 }
 
 function deleteItem(task: Task) {
   console.log(task.id)
-  // let currentTasks = JSON.parse(localStorage.getItem("TASKS")  || '{}')
-  // console.log(currentTasks)
-  // currentTasks.splice(task.id, 1)
-  // localStorage.setItem("TASKS", JSON.stringify(currentTasks))
-  // localStorage.setItem("TASKS", list)
+  let currentTasks = JSON.parse(localStorage.getItem("TASKS")  || '{}')
+  console.log(currentTasks)
+  currentTasks.splice(task.id, 1)
+  localStorage.setItem("TASKS", JSON.stringify(currentTasks))
+  loadTasks()
   // aqui não podemos deletar a array toda, então teremos que recriar a lista sem o item em questão
   
 }
