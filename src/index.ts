@@ -78,3 +78,13 @@ function loadTasks(): Task[] {
   return JSON.parse(taskJSON)
 }
 
+const deleteAllBtn = document.getElementById('delete-all-btn')
+deleteAllBtn?.addEventListener("click", deleteList)
+
+function deleteList() {
+  const result = confirm("Delete the whole list?")
+  if (result) {
+    localStorage.removeItem("TASKS")
+    location.reload()
+  }
+}
