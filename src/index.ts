@@ -10,6 +10,7 @@ type Task = {
 const list = document.querySelector<HTMLUListElement>('#list')
 const form = document.getElementById('new-task-form') as HTMLFormElement | null
 const input = document.querySelector<HTMLInputElement>('#new-task-title')
+const deleteBtn = document.getElementById('delete-btn') as HTMLButtonElement | null
 const tasks: Task[] = loadTasks()
 tasks.forEach(addListItem)
 
@@ -51,15 +52,21 @@ function addListItem(task: Task) {
   list?.append(item)
   list?.append(deleteBtn)
 
-  deleteBtn.addEventListener("click", () => {
-    console.log(task.id)
-    let currentTasks = JSON.parse(localStorage.getItem("TASKS")  || '{}')
-    console.log(currentTasks)
-    // currentTasks.splice(task.id, 1)
-    // localStorage.setItem("TASKS", JSON.stringify(currentTasks))
-    // localStorage.setItem("TASKS", list)
-    // aqui não podemos deletar a array toda, então teremos que recriar a lista sem o item em questão
+  deleteBtn.addEventListener("click", e => {
+    e.preventDefault()
+    deleteItem(task)
   })
+}
+
+function deleteItem(task: Task) {
+  console.log(task.id)
+  // let currentTasks = JSON.parse(localStorage.getItem("TASKS")  || '{}')
+  // console.log(currentTasks)
+  // currentTasks.splice(task.id, 1)
+  // localStorage.setItem("TASKS", JSON.stringify(currentTasks))
+  // localStorage.setItem("TASKS", list)
+  // aqui não podemos deletar a array toda, então teremos que recriar a lista sem o item em questão
+  
 }
 
 function saveTasks() {
