@@ -40,11 +40,11 @@ function addListItem(task: Task) {
   deleteBtn.innerText = "X"
   deleteBtn.setAttribute("id", "delete-btn")
 
-  checkbox.addEventListener("change", () => {
+  checkbox.addEventListener('change', () => {
     task.completed = checkbox.checked
     saveTasks()
   })
-  checkbox.type = "checkbox"
+  checkbox.type = 'checkbox'
   checkbox.checked = task.completed
 
   label.append(checkbox, task.title)
@@ -52,39 +52,45 @@ function addListItem(task: Task) {
   list?.append(item)
   list?.append(deleteBtn)
 
-  deleteBtn.addEventListener("click", () => {
+  deleteBtn.addEventListener('click', () => {
     deleteItem(task)
   })
 }
 
 function deleteItem(task: Task) {
-  console.log(task.id)
-  let currentTasks = JSON.parse(localStorage.getItem("TASKS")  || '{}')
-  console.log(currentTasks)
-  currentTasks.splice(task.id, 1)
-  localStorage.setItem("TASKS", JSON.stringify(currentTasks))
-  loadTasks()
-  // aqui não podemos deletar a array toda, então teremos que recriar a lista sem o item em questão
+
+let currentTasks = JSON.parse(localStorage.getItem('TASKS')  || '{}')
+currentTasks = currentTasks.filter(function(elem: { id: string }) {
+  return elem.id !== task.id;
+});
   
+localStorage.setItem("TASKS",JSON.stringify(currentTasks));
+location.reload()
+
+  // utilizei uma versão da solução abaixo 
+  // https://codepen.io/szymongabrek/pen/QMmeyQ
+
+  // aqui não podemos deletar a array toda, então teremos que recriar a lista sem o item em questão
 }
+  
 
 function saveTasks() {
-  localStorage.setItem("TASKS", JSON.stringify(tasks))
+  localStorage.setItem('TASKS', JSON.stringify(tasks))
 }
 
 function loadTasks(): Task[] {
-  const taskJSON = localStorage.getItem("TASKS")
+  const taskJSON = localStorage.getItem('TASKS')
   if (taskJSON == null) return []
   return JSON.parse(taskJSON)
 }
 
 const deleteAllBtn = document.getElementById('delete-all-btn')
-deleteAllBtn?.addEventListener("click", deleteList)
+deleteAllBtn?.addEventListener('click', deleteList)
 
 function deleteList() {
-  const result = confirm("Delete the whole list?")
+  const result = confirm('Delete the whole list?')
   if (result) {
-    localStorage.removeItem("TASKS")
+    localStorage.removeItem('TASKS')
     location.reload()
   }
 }
