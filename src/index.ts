@@ -7,7 +7,7 @@ type Task = {
   createdAt: Date 
 }
 
-const list = document.querySelector<HTMLUListElement>('#list')
+const list = document.querySelector<HTMLUListElement>('#task-list')
 const form = document.getElementById('new-task-form') as HTMLFormElement | null
 const input = document.querySelector<HTMLInputElement>('#new-task-title')
 const deleteBtn = document.getElementById('delete-btn') as HTMLButtonElement | null
@@ -59,18 +59,17 @@ function addListItem(task: Task) {
 
 function deleteItem(task: Task) {
 
-let currentTasks = JSON.parse(localStorage.getItem('TASKS')  || '{}')
-currentTasks = currentTasks.filter(function(elem: { id: string }) {
-  return elem.id !== task.id;
-});
-  
-localStorage.setItem("TASKS",JSON.stringify(currentTasks));
-location.reload()
-
-  // utilizei uma versão da solução abaixo 
-  // https://codepen.io/szymongabrek/pen/QMmeyQ
+  let currentTasks = JSON.parse(localStorage.getItem('TASKS')  || '{}')
+  currentTasks = currentTasks.filter(function(elem: { id: string }) {
+    return elem.id !== task.id;
+  });
+    
+  localStorage.setItem("TASKS",JSON.stringify(currentTasks));
+  location.reload()
 
   // aqui não podemos deletar a array toda, então teremos que recriar a lista sem o item em questão
+  // utilizei uma versão da solução abaixo 
+  // https://codepen.io/szymongabrek/pen/QMmeyQ
 }
   
 

@@ -1,24 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="dist/index.js" type="module"></script>
+  <!-- <link rel="stylesheet" href="./static/style.css"> -->
   <title>To-do List</title>
+
   <style>
-    #list {
-      list-style: none;
-      padding: 0;
+    * {
+      margin: 0;
+      box-sizing: border-box;
+      font-family: Avenir, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: #2c3e50;
     }
+
+    #todo-list {
+      margin-top: 20px;
+      display: inline-grid;
+      align-items: center;
+      max-width: 400px;
+      overflow-wrap: break-word;
+      
+    }
+
+    label input[type=checkbox]:checked {
+      text-decoration: line-through;
+      background:black;
+    }
+
+    #task-list {
+      background-color: rgb(225, 225, 225);
+      list-style-type: none;
+      padding: 10px;
+    }
+
+    #delete-btn {
+      display: inline-flex
+    }
+
+    #new-task-form {
+      margin-top: 100px;
+      width: 80%;
+      max-width: 400px;
+      margin-inline: auto;
+    }
+
+    #btn-padrao {
+      border: none;
+      background: #42b983;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      padding: 5px 10px;
+      font-size: 1rem;
+      margin: 10px;
+      box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    #btn-padrao:hover {
+      background: #5bd39d;
+    }
+
+    #delete-all-btn, #delete-btn {
+      margin-top: 10px;
+      display: block;
+      align-content: center;
+      border: none;
+      background: #b94256;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      padding: 5px 10px;
+      font-size: 1rem;
+      margin: 10px;
+      box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    #delete-btn:hover {
+      background: #ce4f64;
+    }
+
+    #delete-all-btn:hover {
+      background: #ce4f64;
+    }
+
+    
   </style>
+
 </head>
+
 <body>
-  <ul id="list"></ul>
+  <div id="todo-list">
+    <h2>To-do list</h2>
+    <ul id="task-list"></ul>
+  </div>
+  
   <form id="new-task-form">
+    <h2>Submit a new task</h2>
     <input type="text" id="new-task-title">
-    <button type="submit">Add</button>
+    <button id="btn-padrao" type="submit">Add</button>
+    <button id="delete-all-btn">Delete all</button>
   </form>
-  <button id="delete-all-btn">Delete all</button>
+
 </body>
+
 </html>
